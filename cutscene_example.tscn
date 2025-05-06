@@ -1,0 +1,454 @@
+[gd_scene load_steps=23 format=3 uid="uid://dwrkto36gc40q"]
+
+[ext_resource type="Script" uid="uid://dfefoynxb6ai1" path="res://player.gd" id="1_lckrt"]
+[ext_resource type="Script" uid="uid://dgisvsghngok7" path="res://player_controller.gd" id="2_0yc1l"]
+[ext_resource type="Script" uid="uid://bof4dd1rybpwl" path="res://cutscene_trigger.gd" id="2_mnwue"]
+[ext_resource type="Script" uid="uid://h146125timg" path="res://cutscene.gd" id="3_5bk7s"]
+[ext_resource type="Script" uid="uid://bmdmeppph8va4" path="res://trigger_area.gd" id="3_f8bqj"]
+[ext_resource type="Script" uid="uid://6rakdmga5xbj" path="res://cutscene_components/switch_camera.gd" id="5_mdsot"]
+[ext_resource type="Script" uid="uid://b52mte8h2gn3m" path="res://cutscene_components/wait.gd" id="6_0yc1l"]
+[ext_resource type="Script" uid="uid://ccufwacpfdlwp" path="res://cutscene_components/kill_nodes.gd" id="9_0yf3m"]
+[ext_resource type="Script" uid="uid://ceqk6qchrn26l" path="res://dialog_display.gd" id="9_cb52m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ruo0c"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_mnwue"]
+sky_material = SubResource("ProceduralSkyMaterial_ruo0c")
+
+[sub_resource type="Environment" id="Environment_5bk7s"]
+background_mode = 2
+sky = SubResource("Sky_mnwue")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_lckrt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ruo0c"]
+noise_type = 2
+frequency = 0.0398
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mnwue"]
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_lckrt")
+noise = SubResource("FastNoiseLite_ruo0c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5bk7s"]
+albedo_texture = SubResource("NoiseTexture2D_mnwue")
+texture_filter = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f8bqj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdsot"]
+albedo_color = Color(0.169192, 0.569464, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0yc1l"]
+albedo_color = Color(1.29953e-06, 0.65535, 0.292371, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mdsot"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyiqo"]
+albedo_color = Color(0.990156, 0, 0.440274, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sb7t4"]
+albedo_color = Color(0.916015, 0.727669, 0, 1)
+
+[node name="CutsceneExample" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5bk7s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.295541, -0.82734, 0.477665, 2.78059e-08, 0.5, 0.866025, -0.95533, 0.255946, -0.147771, 2.71216, 0, -2.95702)
+shadow_enabled = true
+
+[node name="GroundPlane" type="CSGBox3D" parent="."]
+transform = Transform3D(0.999991, 0, 0.00434586, 0, 1, 0, -0.00434586, 0, 0.999991, 0, 0, 0)
+use_collision = true
+size = Vector3(100, 0.02, 100)
+material = SubResource("StandardMaterial3D_5bk7s")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17683, 0.494003, -1.78992)
+script = ExtResource("1_lckrt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("SphereShape3D_f8bqj")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Player"]
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_mdsot")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.85976, 0)
+current = true
+
+[node name="PlayerController" type="Node" parent="Player"]
+script = ExtResource("2_0yc1l")
+
+[node name="NPC" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.855327, 0.496231, 0.628098)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC"]
+shape = SubResource("SphereShape3D_f8bqj")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="NPC"]
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_0yc1l")
+
+[node name="CutsceneTrigger" type="Node3D" parent="NPC" node_paths=PackedStringArray("cutscene_node")]
+script = ExtResource("2_mnwue")
+cutscene_node = NodePath("../../Cutscene")
+
+[node name="TriggerArea" type="Area3D" parent="NPC/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
+script = ExtResource("3_f8bqj")
+trigger_nodes = [NodePath("../../../Player")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC/CutsceneTrigger/TriggerArea"]
+shape = SubResource("SphereShape3D_mdsot")
+
+[node name="Cutscene" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
+script = ExtResource("3_5bk7s")
+player_controller = NodePath("../Player/PlayerController")
+
+[node name="SwitchCamera" type="Node3D" parent="Cutscene" node_paths=PackedStringArray("target_camera")]
+script = ExtResource("5_mdsot")
+target_camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="Cutscene/SwitchCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, 0, 1.78833, 2.45569)
+
+[node name="Wait" type="Node" parent="Cutscene"]
+script = ExtResource("6_0yc1l")
+wait_time = 0.5
+
+[node name="DialogDisplay" type="Node" parent="Cutscene"]
+script = ExtResource("9_cb52m")
+actor_name = "Green Ball"
+dialog_text = "Hey Blue. How's it going? I'm just chilling out in this blank void."
+
+[node name="Control" type="Control" parent="Cutscene/DialogDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Cutscene/DialogDisplay/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -168.0
+offset_right = 400.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Cutscene/DialogDisplay/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Cutscene/DialogDisplay/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ActorName" type="RichTextLabel" parent="Cutscene/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Actor Name"
+
+[node name="HSeparator" type="HSeparator" parent="Cutscene/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogText" type="RichTextLabel" parent="Cutscene/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "This is an example of what some dialog in game would look like."
+
+[node name="RetargetCutsceneTrigger" type="Node" parent="Cutscene"]
+
+[node name="Cutscene2" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
+script = ExtResource("3_5bk7s")
+player_controller = NodePath("../Player/PlayerController")
+
+[node name="SwitchCamera" type="Node3D" parent="Cutscene2" node_paths=PackedStringArray("target_camera")]
+script = ExtResource("5_mdsot")
+target_camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="Cutscene2/SwitchCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, 0, 1.78833, 2.45569)
+
+[node name="Wait" type="Node" parent="Cutscene2"]
+script = ExtResource("6_0yc1l")
+wait_time = 0.5
+
+[node name="DialogDisplay" type="Node" parent="Cutscene2"]
+script = ExtResource("9_cb52m")
+actor_name = "Green Ball"
+dialog_text = "Things don't change much here, do they?"
+
+[node name="Control" type="Control" parent="Cutscene2/DialogDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Cutscene2/DialogDisplay/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -168.0
+offset_right = 400.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Cutscene2/DialogDisplay/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Cutscene2/DialogDisplay/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ActorName" type="RichTextLabel" parent="Cutscene2/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Actor Name"
+
+[node name="HSeparator" type="HSeparator" parent="Cutscene2/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogText" type="RichTextLabel" parent="Cutscene2/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "This is an example of what some dialog in game would look like."
+
+[node name="NPC2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1264, 0.496231, -3.23378)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC2"]
+shape = SubResource("SphereShape3D_f8bqj")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="NPC2"]
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_oyiqo")
+
+[node name="CutsceneTrigger" type="Node3D" parent="NPC2" node_paths=PackedStringArray("cutscene_node")]
+script = ExtResource("2_mnwue")
+cutscene_node = NodePath("../../Cutscene3")
+oneshot = false
+
+[node name="TriggerArea" type="Area3D" parent="NPC2/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
+script = ExtResource("3_f8bqj")
+trigger_nodes = [NodePath("../../../Player")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC2/CutsceneTrigger/TriggerArea"]
+shape = SubResource("SphereShape3D_mdsot")
+
+[node name="Cutscene3" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
+script = ExtResource("3_5bk7s")
+player_controller = NodePath("../Player/PlayerController")
+
+[node name="SwitchCamera" type="Node3D" parent="Cutscene3" node_paths=PackedStringArray("target_camera")]
+script = ExtResource("5_mdsot")
+target_camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="Cutscene3/SwitchCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, -7.14224, 1.78833, -1.18228)
+
+[node name="Wait" type="Node" parent="Cutscene3"]
+script = ExtResource("6_0yc1l")
+wait_time = 0.5
+
+[node name="DialogDisplay" type="Node" parent="Cutscene3"]
+script = ExtResource("9_cb52m")
+actor_name = "Red Ball"
+dialog_text = "Leave me alone. I don't feel like talking right now."
+
+[node name="Control" type="Control" parent="Cutscene3/DialogDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Cutscene3/DialogDisplay/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -168.0
+offset_right = 400.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Cutscene3/DialogDisplay/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Cutscene3/DialogDisplay/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ActorName" type="RichTextLabel" parent="Cutscene3/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Actor Name"
+
+[node name="HSeparator" type="HSeparator" parent="Cutscene3/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogText" type="RichTextLabel" parent="Cutscene3/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "This is an example of what some dialog in game would look like."
+
+[node name="NPC3" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72099, 0.496231, -4.04487)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC3"]
+shape = SubResource("SphereShape3D_f8bqj")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="NPC3"]
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_sb7t4")
+
+[node name="CutsceneTrigger" type="Node3D" parent="NPC3" node_paths=PackedStringArray("cutscene_node")]
+script = ExtResource("2_mnwue")
+cutscene_node = NodePath("../../Cutscene4")
+
+[node name="TriggerArea" type="Area3D" parent="NPC3/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
+script = ExtResource("3_f8bqj")
+trigger_nodes = [NodePath("../../../Player")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC3/CutsceneTrigger/TriggerArea"]
+shape = SubResource("SphereShape3D_mdsot")
+
+[node name="Cutscene4" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
+script = ExtResource("3_5bk7s")
+player_controller = NodePath("../Player/PlayerController")
+
+[node name="SwitchCamera" type="Node3D" parent="Cutscene4" node_paths=PackedStringArray("target_camera")]
+script = ExtResource("5_mdsot")
+target_camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="Cutscene4/SwitchCamera"]
+transform = Transform3D(-0.994463, -0.0542668, 0.0899874, 0, 0.856339, 0.516414, -0.105084, 0.513555, -0.851598, 3.64732, 1.78833, -5.73652)
+
+[node name="Wait" type="Node" parent="Cutscene4"]
+script = ExtResource("6_0yc1l")
+wait_time = 0.5
+
+[node name="DialogDisplay" type="Node" parent="Cutscene4"]
+script = ExtResource("9_cb52m")
+actor_name = "Yellow Ball"
+dialog_text = "I'm noping out of this situation. Seeya."
+
+[node name="Control" type="Control" parent="Cutscene4/DialogDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Cutscene4/DialogDisplay/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -168.0
+offset_right = 400.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Cutscene4/DialogDisplay/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Cutscene4/DialogDisplay/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ActorName" type="RichTextLabel" parent="Cutscene4/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Actor Name"
+
+[node name="HSeparator" type="HSeparator" parent="Cutscene4/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DialogText" type="RichTextLabel" parent="Cutscene4/DialogDisplay/Control/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "This is an example of what some dialog in game would look like."
+
+[node name="Wait2" type="Node" parent="Cutscene4"]
+script = ExtResource("6_0yc1l")
+wait_time = 1.0
+
+[node name="KillNodes" type="Node" parent="Cutscene4" node_paths=PackedStringArray("target_nodes")]
+script = ExtResource("9_0yf3m")
+target_nodes = [NodePath("../../NPC3")]
+metadata/_custom_type_script = "uid://d4l1cq1d2yipt"
+
+[node name="Wait3" type="Node" parent="Cutscene4"]
+script = ExtResource("6_0yc1l")
+wait_time = 1.0
+
+[node name="KillNodes2" type="Node" parent="Cutscene4" node_paths=PackedStringArray("target_nodes")]
+script = ExtResource("9_0yf3m")
+target_nodes = [NodePath("..")]
+metadata/_custom_type_script = "uid://d4l1cq1d2yipt"
+
+[connection signal="triggered" from="NPC/CutsceneTrigger/TriggerArea" to="NPC/CutsceneTrigger" method="_on_trigger"]
+[connection signal="triggered" from="NPC2/CutsceneTrigger/TriggerArea" to="NPC2/CutsceneTrigger" method="_on_trigger"]
+[connection signal="triggered" from="NPC3/CutsceneTrigger/TriggerArea" to="NPC3/CutsceneTrigger" method="_on_trigger"]

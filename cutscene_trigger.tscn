@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://2iyfygmonqhe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oyiqo"]
+radius = 1.0
+
+[node name="CutsceneTrigger" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_oyiqo")
