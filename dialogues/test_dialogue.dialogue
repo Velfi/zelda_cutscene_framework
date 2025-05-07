@@ -1,0 +1,11 @@
+~ start
+Green Orb: [[Hi|Hello|Howdy]], this is some dialogue.
+Green Orb: Here are some choices.
+- First one
+	Green Orb: You picked the first one.
+- Second one
+	Green Orb: You picked the second one.
+- Start again => start
+- End the conversation => END
+Green Orb: For more information see the online documentation.
+=> END

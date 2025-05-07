@@ -18,9 +18,12 @@ func play() -> void:
 
 	for child in children:
 		if not child is CutsceneComponent:
-			pass
+			continue
 
-		await child.play()
+		if child.has_method("play"):
+			await child.play()
+		else:
+			printerr("Child %s does not have a play method" % child.name)
 	
 	camera_at_start.make_current()
 	if player_controller != null:

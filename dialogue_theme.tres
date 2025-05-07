@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://gfka3rjdsg70"]
+
+[ext_resource type="FontFile" uid="uid://qnfo5nibdmbu" path="res://Texturina-VariableFont_opsz,wght.ttf" id="1_jcyhk"]
+[ext_resource type="FontFile" uid="uid://ccwosmflwc0to" path="res://Shizuru-Regular.ttf" id="1_m45ya"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m45ya"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.252028, 0.252028, 0.252028, 0.411765)
+
+[resource]
+default_font = ExtResource("1_jcyhk")
+Button/styles/normal = SubResource("StyleBoxFlat_m45ya")
+RichTextLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+RichTextLabel/constants/outline_size = 2
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = ExtResource("1_m45ya")
