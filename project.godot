@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ZeldaCutsceneFramework"
-run/main_scene="res://cutscene_example.tscn"
+run/main_scene="res://demo/cutscene_example.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -33,4 +33,4 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/test_dialogue.dialogue", "res://dialogues/yellow_orb_dialogue.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/test_dialogue.dialogue", "res://dialogues/yellow_orb_dialogue.dialogue", "res://dialogues/red_orb_dialogue.dialogue", "res://dialogues/green_orb_dialogue.dialogue")

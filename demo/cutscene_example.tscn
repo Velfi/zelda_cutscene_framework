@@ -1,16 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://dwrkto36gc40q"]
+[gd_scene load_steps=30 format=3 uid="uid://dwrkto36gc40q"]
 
-[ext_resource type="Script" uid="uid://dfefoynxb6ai1" path="res://player.gd" id="1_lckrt"]
-[ext_resource type="Script" uid="uid://dgisvsghngok7" path="res://player_controller.gd" id="2_0yc1l"]
-[ext_resource type="Script" uid="uid://bof4dd1rybpwl" path="res://cutscene_trigger.gd" id="2_mnwue"]
-[ext_resource type="Script" uid="uid://h146125timg" path="res://cutscene.gd" id="3_5bk7s"]
-[ext_resource type="Script" uid="uid://bmdmeppph8va4" path="res://trigger_area.gd" id="3_f8bqj"]
-[ext_resource type="Script" uid="uid://6rakdmga5xbj" path="res://cutscene_components/switch_camera.gd" id="5_mdsot"]
-[ext_resource type="Script" uid="uid://b52mte8h2gn3m" path="res://cutscene_components/wait.gd" id="6_0yc1l"]
-[ext_resource type="Script" uid="uid://ccufwacpfdlwp" path="res://cutscene_components/kill_nodes.gd" id="9_0yf3m"]
-[ext_resource type="Resource" uid="uid://qakmqnfyk1kw" path="res://dialogues/test_dialogue.dialogue" id="9_sb7t4"]
-[ext_resource type="PackedScene" uid="uid://c1gimg78wkykf" path="res://cutscene_components/dialog_display.tscn" id="10_cb52m"]
-[ext_resource type="Resource" uid="uid://cxp4x44f2ir85" path="res://dialogues/yellow_orb_dialogue.dialogue" id="10_fdqor"]
+[ext_resource type="Script" uid="uid://dfefoynxb6ai1" path="res://demo/player.gd" id="1_jrk2a"]
+[ext_resource type="Script" uid="uid://dgisvsghngok7" path="res://demo/player_controller.gd" id="2_u7wf5"]
+[ext_resource type="Script" uid="uid://bof4dd1rybpwl" path="res://cutscene_trigger.gd" id="3_ybucl"]
+[ext_resource type="Script" uid="uid://bmdmeppph8va4" path="res://trigger_area.gd" id="4_3oqns"]
+[ext_resource type="Script" uid="uid://h146125timg" path="res://cutscene.gd" id="5_bh04v"]
+[ext_resource type="Script" uid="uid://6rakdmga5xbj" path="res://cutscene_components/switch_camera.gd" id="6_3dn8o"]
+[ext_resource type="Script" uid="uid://b52mte8h2gn3m" path="res://cutscene_components/wait.gd" id="7_j5hng"]
+[ext_resource type="PackedScene" uid="uid://c1gimg78wkykf" path="res://cutscene_components/dialog_display.tscn" id="8_y324r"]
+[ext_resource type="Resource" uid="uid://tqnt2gohaq8a" path="res://dialogues/green_orb_dialogue.dialogue" id="9_u7wf5"]
+[ext_resource type="Resource" uid="uid://cxp4x44f2ir85" path="res://dialogues/yellow_orb_dialogue.dialogue" id="10_ibvvm"]
+[ext_resource type="Resource" uid="uid://dmca50v782842" path="res://dialogues/red_orb_dialogue.dialogue" id="10_u7wf5"]
+[ext_resource type="Script" uid="uid://b0p5opmq213yn" path="res://cutscene_components/play_animation.gd" id="11_qjxdd"]
+[ext_resource type="Script" uid="uid://ccufwacpfdlwp" path="res://cutscene_components/kill_nodes.gd" id="12_f6um0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ruo0c"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -58,6 +60,42 @@ albedo_color = Color(0.990156, 0, 0.440274, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sb7t4"]
 albedo_color = Color(0.916015, 0.727669, 0, 1)
 
+[sub_resource type="Animation" id="Animation_fdqor"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGSphere3D:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_cb52m"]
+resource_name = "SHRINK"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGSphere3D:radius")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667, 0.666667, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.161, 0.221, 0.161]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cnl7f"]
+_data = {
+&"RESET": SubResource("Animation_fdqor"),
+&"SHRINK": SubResource("Animation_cb52m")
+}
+
 [node name="CutsceneExample" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -75,7 +113,7 @@ material = SubResource("StandardMaterial3D_5bk7s")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19338, 0.494003, -4.07882)
-script = ExtResource("1_lckrt")
+script = ExtResource("1_jrk2a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("SphereShape3D_f8bqj")
@@ -90,7 +128,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.8
 current = true
 
 [node name="PlayerController" type="Node" parent="Player"]
-script = ExtResource("2_0yc1l")
+script = ExtResource("2_u7wf5")
 
 [node name="NPC" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.855327, 0.496231, 0.628098)
@@ -104,50 +142,33 @@ rings = 12
 material = SubResource("StandardMaterial3D_0yc1l")
 
 [node name="CutsceneTrigger" type="Node3D" parent="NPC" node_paths=PackedStringArray("cutscene_node")]
-script = ExtResource("2_mnwue")
+script = ExtResource("3_ybucl")
 cutscene_node = NodePath("../../Cutscene")
 
 [node name="TriggerArea" type="Area3D" parent="NPC/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
-script = ExtResource("3_f8bqj")
+script = ExtResource("4_3oqns")
 trigger_nodes = [NodePath("../../../Player")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NPC/CutsceneTrigger/TriggerArea"]
 shape = SubResource("SphereShape3D_mdsot")
 
 [node name="Cutscene" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
-script = ExtResource("3_5bk7s")
+script = ExtResource("5_bh04v")
 player_controller = NodePath("../Player/PlayerController")
 
 [node name="SwitchCamera" type="Node3D" parent="Cutscene" node_paths=PackedStringArray("target_camera")]
-script = ExtResource("5_mdsot")
+script = ExtResource("6_3dn8o")
 target_camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="Cutscene/SwitchCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, 0, 1.78833, 2.45569)
 
 [node name="Wait" type="Node" parent="Cutscene"]
-script = ExtResource("6_0yc1l")
+script = ExtResource("7_j5hng")
 wait_time = 0.5
 
-[node name="DialogDisplay" parent="Cutscene" instance=ExtResource("10_cb52m")]
-dialogue_resource = ExtResource("9_sb7t4")
-
-[node name="Cutscene2" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
-script = ExtResource("3_5bk7s")
-player_controller = NodePath("../Player/PlayerController")
-
-[node name="SwitchCamera" type="Node3D" parent="Cutscene2" node_paths=PackedStringArray("target_camera")]
-script = ExtResource("5_mdsot")
-target_camera = NodePath("Camera3D")
-
-[node name="Camera3D" type="Camera3D" parent="Cutscene2/SwitchCamera"]
-transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, 0, 1.78833, 2.45569)
-
-[node name="Wait" type="Node" parent="Cutscene2"]
-script = ExtResource("6_0yc1l")
-wait_time = 0.5
-
-[node name="DialogDisplay" parent="Cutscene2" instance=ExtResource("10_cb52m")]
+[node name="DialogDisplay" parent="Cutscene" instance=ExtResource("8_y324r")]
+dialogue_resource = ExtResource("9_u7wf5")
 
 [node name="NPC2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19481, 0.496231, -1.54392)
@@ -161,12 +182,12 @@ rings = 12
 material = SubResource("StandardMaterial3D_oyiqo")
 
 [node name="CutsceneTrigger" type="Node3D" parent="NPC2" node_paths=PackedStringArray("cutscene_node")]
-script = ExtResource("2_mnwue")
+script = ExtResource("3_ybucl")
 cutscene_node = NodePath("../../Cutscene3")
 oneshot = false
 
 [node name="TriggerArea" type="Area3D" parent="NPC2/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
-script = ExtResource("3_f8bqj")
+script = ExtResource("4_3oqns")
 trigger_nodes = [NodePath("../../../Player")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NPC2/CutsceneTrigger/TriggerArea"]
@@ -174,21 +195,22 @@ shape = SubResource("SphereShape3D_mdsot")
 
 [node name="Cutscene3" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56356, 0, -0.0598645)
-script = ExtResource("3_5bk7s")
+script = ExtResource("5_bh04v")
 player_controller = NodePath("../Player/PlayerController")
 
 [node name="SwitchCamera" type="Node3D" parent="Cutscene3" node_paths=PackedStringArray("target_camera")]
-script = ExtResource("5_mdsot")
+script = ExtResource("6_3dn8o")
 target_camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="Cutscene3/SwitchCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.856339, 0.516414, 0, -0.516414, 0.856339, 0, 2.16246, 0.640273)
 
 [node name="Wait" type="Node" parent="Cutscene3"]
-script = ExtResource("6_0yc1l")
+script = ExtResource("7_j5hng")
 wait_time = 0.5
 
-[node name="DialogDisplay" parent="Cutscene3" instance=ExtResource("10_cb52m")]
+[node name="DialogDisplay" parent="Cutscene3" instance=ExtResource("8_y324r")]
+dialogue_resource = ExtResource("10_u7wf5")
 
 [node name="NPC3" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72099, 0.496231, -4.04487)
@@ -202,49 +224,61 @@ rings = 12
 material = SubResource("StandardMaterial3D_sb7t4")
 
 [node name="CutsceneTrigger" type="Node3D" parent="NPC3" node_paths=PackedStringArray("cutscene_node")]
-script = ExtResource("2_mnwue")
+script = ExtResource("3_ybucl")
 cutscene_node = NodePath("../../Cutscene4")
 
 [node name="TriggerArea" type="Area3D" parent="NPC3/CutsceneTrigger" node_paths=PackedStringArray("trigger_nodes")]
-script = ExtResource("3_f8bqj")
+script = ExtResource("4_3oqns")
 trigger_nodes = [NodePath("../../../Player")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NPC3/CutsceneTrigger/TriggerArea"]
 shape = SubResource("SphereShape3D_mdsot")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC3"]
+libraries = {
+&"": SubResource("AnimationLibrary_cnl7f")
+}
+
 [node name="Cutscene4" type="Node3D" parent="." node_paths=PackedStringArray("player_controller")]
-script = ExtResource("3_5bk7s")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45001, 0, -3.98907)
+script = ExtResource("5_bh04v")
 player_controller = NodePath("../Player/PlayerController")
 
 [node name="SwitchCamera" type="Node3D" parent="Cutscene4" node_paths=PackedStringArray("target_camera")]
-script = ExtResource("5_mdsot")
+script = ExtResource("6_3dn8o")
 target_camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="Cutscene4/SwitchCamera"]
-transform = Transform3D(-0.994463, -0.0542668, 0.0899874, 0, 0.856339, 0.516414, -0.105084, 0.513555, -0.851598, 3.64732, 1.78833, -5.73652)
+transform = Transform3D(-0.994463, -0.0542669, 0.0899876, 0, 0.856339, 0.516414, -0.105084, 0.513555, -0.851598, -0.717923, 1.78833, -2.14452)
 
 [node name="Wait" type="Node" parent="Cutscene4"]
-script = ExtResource("6_0yc1l")
+script = ExtResource("7_j5hng")
 wait_time = 0.5
 
-[node name="DialogDisplay" parent="Cutscene4" instance=ExtResource("10_cb52m")]
-dialogue_resource = ExtResource("10_fdqor")
+[node name="DialogDisplay" parent="Cutscene4" instance=ExtResource("8_y324r")]
+dialogue_resource = ExtResource("10_ibvvm")
+
+[node name="PlayAnimation" type="Node" parent="Cutscene4" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("11_qjxdd")
+animation_player = NodePath("../../NPC3/AnimationPlayer")
+animation_name = "SHRINK"
+wait_until_finished = true
 
 [node name="Wait2" type="Node" parent="Cutscene4"]
-script = ExtResource("6_0yc1l")
-wait_time = 1.0
+script = ExtResource("7_j5hng")
+wait_time = 0.2
 
 [node name="KillNodes" type="Node" parent="Cutscene4" node_paths=PackedStringArray("target_nodes")]
-script = ExtResource("9_0yf3m")
+script = ExtResource("12_f6um0")
 target_nodes = [NodePath("../../NPC3")]
 metadata/_custom_type_script = "uid://d4l1cq1d2yipt"
 
 [node name="Wait3" type="Node" parent="Cutscene4"]
-script = ExtResource("6_0yc1l")
+script = ExtResource("7_j5hng")
 wait_time = 1.0
 
 [node name="KillNodes2" type="Node" parent="Cutscene4" node_paths=PackedStringArray("target_nodes")]
-script = ExtResource("9_0yf3m")
+script = ExtResource("12_f6um0")
 target_nodes = [NodePath("..")]
 metadata/_custom_type_script = "uid://d4l1cq1d2yipt"
 

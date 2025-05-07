@@ -23,14 +23,20 @@ func enable_control() -> void:
 	is_disabled = false
 
 
+func _process(_delta: float) -> void:
+	if is_disabled:
+		return
+
+	# Handle movement input in _process for smoother response
+	var new_movement_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if new_movement_input != Vector2.ZERO:
+		movement_input.emit(new_movement_input.normalized())
+
+
 func _input(event: InputEvent) -> void:
 	if is_disabled:
 		return
 
-	if event is InputEventAction and event.action == "jump":
+	# Only handle jump input in _input since it's a one-time action
+	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		jump_input.emit()
-
-	var new_movement_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	if new_movement_input != Vector2.ZERO:
-		movement_input.emit(new_movement_input.normalized())

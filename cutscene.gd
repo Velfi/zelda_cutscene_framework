@@ -18,6 +18,7 @@ func play() -> void:
 
 	for child in children:
 		if not child is CutsceneComponent:
+			printerr("Child %s is not a CutsceneComponent" % child.name)
 			continue
 
 		if child.has_method("play"):

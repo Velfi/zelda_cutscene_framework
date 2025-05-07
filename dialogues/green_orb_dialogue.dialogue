@@ -1,0 +1,19 @@
+~ start
+Green Orb: Hello!
+Green Orb: I'm the green orb and I exist to demonstrate the cutscene system.
+~ choice
+Green Orb: choose wisely.
+- Uh. No thanks. => END
+- Where are we?
+	Green Orb: We're in the featureless void.
+	=> choice
+- Red Orb?
+	Green Orb: Red Orb is a bit of a misanthrope.
+	=> choice
+- Blue Orb?
+	Green Orb: That's you, of course.
+	=> choice
+- Yellow Orb?
+	Green Orb: Yellow Orb isn't doing so well. Maybe you should check on them.
+	=> choice
+=> END

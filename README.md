@@ -24,6 +24,6 @@ A simple cutscene system for Godot 4.x that allows you to create cinematic seque
 An example scene is included that demonstrates the following common patterns:
 
 - Blue Ball: The player's avatar. Only responds to input when a cutscene isn't playing.
-- TODO Green Ball: An NPC. Green ball will say a few things until you've exhausted their dialog.
+- Green Ball: An NPC. Green ball will say a few things until you've exhausted their dialog.
 - Red Ball: An NPC. Red ball will always say the same thing.
 - Yellow Ball: An NPC. Yellow ball will say one thing before disappearing.
