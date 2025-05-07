@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://qnfo5nibdmbu"
-path="res://.godot/imported/Texturina-VariableFont_opsz,wght.ttf-cf597b7ddbc82665fe63a482f848960f.fontdata"
+uid="uid://ccwosmflwc0to"
+path="res://.godot/imported/Shizuru-Regular.ttf-2bac6c1e8e70f0148746a6de2c839370.fontdata"
 
 [deps]
 
-source_file="res://Texturina-VariableFont_opsz,wght.ttf"
-dest_files=["res://.godot/imported/Texturina-VariableFont_opsz,wght.ttf-cf597b7ddbc82665fe63a482f848960f.fontdata"]
+source_file="res://demo/Shizuru-Regular.ttf"
+dest_files=["res://.godot/imported/Shizuru-Regular.ttf-2bac6c1e8e70f0148746a6de2c839370.fontdata"]
 
 [params]
 

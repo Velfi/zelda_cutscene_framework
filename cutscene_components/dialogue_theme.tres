@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://gfka3rjdsg70"]
 
-[ext_resource type="FontFile" uid="uid://qnfo5nibdmbu" path="res://Texturina-VariableFont_opsz,wght.ttf" id="1_jcyhk"]
-[ext_resource type="FontFile" uid="uid://ccwosmflwc0to" path="res://Shizuru-Regular.ttf" id="1_m45ya"]
+[ext_resource type="FontFile" uid="uid://qnfo5nibdmbu" path="res://demo/Texturina-VariableFont_opsz,wght.ttf" id="1_jcyhk"]
+[ext_resource type="FontFile" uid="uid://ccwosmflwc0to" path="res://demo/Shizuru-Regular.ttf" id="1_m45ya"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m45ya"]
 content_margin_left = 16.0

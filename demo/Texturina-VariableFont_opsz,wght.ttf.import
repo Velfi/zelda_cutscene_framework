@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dhxslros1ub0a"
-path="res://.godot/imported/Texturina-Italic-VariableFont_opsz,wght.ttf-e61ce1229b277d4eafef1153135d1841.fontdata"
+uid="uid://qnfo5nibdmbu"
+path="res://.godot/imported/Texturina-VariableFont_opsz,wght.ttf-d74f8c985bf4c116b9d468f710c66a4c.fontdata"
 
 [deps]
 
-source_file="res://Texturina-Italic-VariableFont_opsz,wght.ttf"
-dest_files=["res://.godot/imported/Texturina-Italic-VariableFont_opsz,wght.ttf-e61ce1229b277d4eafef1153135d1841.fontdata"]
+source_file="res://demo/Texturina-VariableFont_opsz,wght.ttf"
+dest_files=["res://.godot/imported/Texturina-VariableFont_opsz,wght.ttf-d74f8c985bf4c116b9d468f710c66a4c.fontdata"]
 
 [params]
 

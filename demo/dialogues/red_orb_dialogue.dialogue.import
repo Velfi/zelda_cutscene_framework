@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dmca50v782842"
+path="res://.godot/imported/red_orb_dialogue.dialogue-aa0b1b761a72b9efd7e00e74a87c6bed.tres"
+
+[deps]
+
+source_file="res://demo/dialogues/red_orb_dialogue.dialogue"
+dest_files=["res://.godot/imported/red_orb_dialogue.dialogue-aa0b1b761a72b9efd7e00e74a87c6bed.tres"]
+
+[params]
+
+defaults=true

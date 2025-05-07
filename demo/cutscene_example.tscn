@@ -8,9 +8,9 @@
 [ext_resource type="Script" uid="uid://6rakdmga5xbj" path="res://cutscene_components/switch_camera.gd" id="6_3dn8o"]
 [ext_resource type="Script" uid="uid://b52mte8h2gn3m" path="res://cutscene_components/wait.gd" id="7_j5hng"]
 [ext_resource type="PackedScene" uid="uid://c1gimg78wkykf" path="res://cutscene_components/dialog_display.tscn" id="8_y324r"]
-[ext_resource type="Resource" uid="uid://tqnt2gohaq8a" path="res://dialogues/green_orb_dialogue.dialogue" id="9_u7wf5"]
-[ext_resource type="Resource" uid="uid://cxp4x44f2ir85" path="res://dialogues/yellow_orb_dialogue.dialogue" id="10_ibvvm"]
-[ext_resource type="Resource" uid="uid://dmca50v782842" path="res://dialogues/red_orb_dialogue.dialogue" id="10_u7wf5"]
+[ext_resource type="Resource" uid="uid://tqnt2gohaq8a" path="res://demo/dialogues/green_orb_dialogue.dialogue" id="9_u7wf5"]
+[ext_resource type="Resource" uid="uid://cxp4x44f2ir85" path="res://demo/dialogues/yellow_orb_dialogue.dialogue" id="10_ibvvm"]
+[ext_resource type="Resource" uid="uid://dmca50v782842" path="res://demo/dialogues/red_orb_dialogue.dialogue" id="10_u7wf5"]
 [ext_resource type="Script" uid="uid://b0p5opmq213yn" path="res://cutscene_components/play_animation.gd" id="11_qjxdd"]
 [ext_resource type="Script" uid="uid://ccufwacpfdlwp" path="res://cutscene_components/kill_nodes.gd" id="12_f6um0"]
 

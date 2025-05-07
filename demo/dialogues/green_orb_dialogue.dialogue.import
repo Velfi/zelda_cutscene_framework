@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://tqnt2gohaq8a"
+path="res://.godot/imported/green_orb_dialogue.dialogue-c93036904f6102197c090d79ba8a6f5b.tres"
+
+[deps]
+
+source_file="res://demo/dialogues/green_orb_dialogue.dialogue"
+dest_files=["res://.godot/imported/green_orb_dialogue.dialogue-c93036904f6102197c090d79ba8a6f5b.tres"]
+
+[params]
+
+defaults=true

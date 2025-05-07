@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ceqk6qchrn26l" path="res://cutscene_components/dialog_display.gd" id="1_12yag"]
 [ext_resource type="Theme" uid="uid://gfka3rjdsg70" path="res://cutscene_components/dialogue_theme.tres" id="2_vxuis"]
-[ext_resource type="FontFile" uid="uid://qnfo5nibdmbu" path="res://Texturina-VariableFont_opsz,wght.ttf" id="3_wijlh"]
+[ext_resource type="FontFile" uid="uid://qnfo5nibdmbu" path="res://demo/Texturina-VariableFont_opsz,wght.ttf" id="3_wijlh"]
 
 [node name="DialogDisplay" type="Node"]
 script = ExtResource("1_12yag")

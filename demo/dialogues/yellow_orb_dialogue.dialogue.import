@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cxp4x44f2ir85"
+path="res://.godot/imported/yellow_orb_dialogue.dialogue-3b7c415c12693351b22c4ce8624c9ad7.tres"
+
+[deps]
+
+source_file="res://demo/dialogues/yellow_orb_dialogue.dialogue"
+dest_files=["res://.godot/imported/yellow_orb_dialogue.dialogue-3b7c415c12693351b22c4ce8624c9ad7.tres"]
+
+[params]
+
+defaults=true
